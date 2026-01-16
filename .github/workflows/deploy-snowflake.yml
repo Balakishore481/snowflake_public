@@ -58,8 +58,7 @@ jobs:
           SF_USERNAME: ${{ secrets.SF_USERNAME }}
           SNOWFLAKE_PSWD: ${{ secrets.SNOWFLAKE_PSWD }}
           SF_ROLE: ${{ secrets.SF_ROLE }}
-          SF_SCHEMA: ${{ secrets.SF_SCHEMA }}
-          SNOWFLAKE_DATABASE: ${{ env.DB_NAME }}
+          SF_SCHEMA: "BALA"
           ENVI: ${{ env.ENVI }}
         run: |
           python scripts/deploy_sql.py DML
