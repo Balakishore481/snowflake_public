@@ -21,6 +21,8 @@ for file in sorted(os.listdir(folder)):
     if file.endswith(".sql"):
         with open(os.path.join(folder, file), "r") as f:
             sql = f.read()
+            print(sql)
+            print(envi)
             # Replace placeholder {{ envi }} with actual environment
             sql = sql.replace("{{ envi }}", envi)
             print(f"Executing {file} on {os.environ['SNOWFLAKE_DATABASE']}...")
