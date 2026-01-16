@@ -11,7 +11,7 @@ conn = snowflake.connector.connect(
     account=os.environ['SF_ACCOUNT'],
     role=os.environ['SF_ROLE'],
     database=os.environ['SF_DATABASE'],
-    wh=os.environ['SF_WAREHOUSE']
+    wh=os.environ['SF_WAREHOUSE'],
     schema=os.environ['SF_SCHEMA']
 )
 
