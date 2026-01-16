@@ -1,0 +1,65 @@
+name: Deploy SQL Objects and DML to Snowflake
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - test
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Snowflake Connector
+        run: |
+          pip install snowflake-connector-python
+
+      - name: Set target environment and database
+        id: set-env
+        run: |
+          if [[ "${{ github.ref_name }}" == "dev" ]]; then
+            echo "ENVI=dev" >> $GITHUB_ENV
+            echo "DB_NAME=DEV_BALA" >> $GITHUB_ENV
+          elif [[ "${{ github.base_ref }}" == "test" ]]; then
+            echo "ENVI=test" >> $GITHUB_ENV
+            echo "DB_NAME=TEST_BALA" >> $GITHUB_ENV
+          elif [[ "${{ github.base_ref }}" == "master" ]]; then
+            echo "ENVI=master" >> $GITHUB_ENV
+            echo "DB_NAME=PROD_BALA" >> $GITHUB_ENV
+          fi
+
+      - name: Deploy DDL objects
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+          SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
+          SNOWFLAKE_DATABASE: ${{ env.DB_NAME }}
+          ENVI: ${{ env.ENVI }}
+        run: |
+          python scripts/deploy_sql.py sql_objects
+
+      - name: Deploy DML operations
+        env:
+          SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+          SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+          SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
+          SNOWFLAKE_DATABASE: ${{ env.DB_NAME }}
+          ENVI: ${{ env.ENVI }}
+        run: |
+          python scripts/deploy_sql.py DML
