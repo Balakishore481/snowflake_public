@@ -50,7 +50,7 @@ jobs:
           SNOWFLAKE_DATABASE: ${{ env.DB_NAME }}
           ENVI: ${{ env.ENVI }}
         run: |
-          python scripts/deploy_sql.py sql_objects
+          python scripts/deploy_sql.py DDL
 
       - name: Deploy DML operations
         env:
