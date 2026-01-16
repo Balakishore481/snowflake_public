@@ -1,1 +1,1 @@
-INSERT INTO {{ envi }}_BALA.BALA.STUDENTS_INFO VALUES('Bala','481','Kakinada rural');
+INSERT INTO {{ envi }}_BALA.BALA.STUDENTS_INFO VALUES('Bala','481','Kakinada (rural)');
