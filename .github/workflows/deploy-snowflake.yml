@@ -42,11 +42,11 @@ jobs:
 
       - name: Deploy DDL objects
         env:
-          SNOWFLAKE_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
-          SNOWFLAKE_USER: ${{ secrets.SF_USERNAME }}
-          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PSWD }}
-          SNOWFLAKE_ROLE: ${{ secrets.SF_ROLE }}
-          SNOWFLAKE_SCHEMA: ${{ secrets.SF_SCHEMA }}
+          SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+          SF_USERNAME: ${{ secrets.SF_USERNAME }}
+          SNOWFLAKE_PSWD: ${{ secrets.SNOWFLAKE_PSWD }}
+          SF_ROLE: ${{ secrets.SF_ROLE }}
+          SF_SCHEMA: ${{ secrets.SF_SCHEMA }}
           SNOWFLAKE_DATABASE: ${{ env.DB_NAME }}
           ENVI: ${{ env.ENVI }}
         run: |
@@ -54,11 +54,11 @@ jobs:
 
       - name: Deploy DML operations
         env:
-          SNOWFLAKE_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
-          SNOWFLAKE_USER: ${{ secrets.SF_USERNAME }}
-          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PSWD }}
-          SNOWFLAKE_ROLE: ${{ secrets.SF_ROLE }}
-          SNOWFLAKE_SCHEMA: ${{ secrets.SF_SCHEMA }}
+          SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+          SF_USERNAME: ${{ secrets.SF_USERNAME }}
+          SNOWFLAKE_PSWD: ${{ secrets.SNOWFLAKE_PSWD }}
+          SF_ROLE: ${{ secrets.SF_ROLE }}
+          SF_SCHEMA: ${{ secrets.SF_SCHEMA }}
           SNOWFLAKE_DATABASE: ${{ env.DB_NAME }}
           ENVI: ${{ env.ENVI }}
         run: |
