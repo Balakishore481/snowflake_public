@@ -24,6 +24,7 @@ for file in sorted(os.listdir(folder)):
             # Replace placeholder {{ envi }} with actual environment
             sql = sql.replace("{{ envi }}", envi)
             print(f"Executing {file} on {os.environ['SNOWFLAKE_DATABASE']}...")
+            print(sql)
             cur.execute(sql)
 
 cur.close()
