@@ -12,6 +12,7 @@ conn = snowflake.connector.connect(
     role=os.environ['SF_ROLE'],
     database=os.environ['SF_DATABASE'],
     wh=os.environ['SF_WAREHOUSE']
+    schema=os.environ['SF_SCHEMA']
 )
 
 cur = conn.cursor()
