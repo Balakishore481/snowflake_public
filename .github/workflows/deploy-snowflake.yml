@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - test
-      - master
+      - main
 
 jobs:
   deploy:
@@ -37,8 +37,8 @@ jobs:
           elif [[ "${{ github.base_ref }}" == "test" ]]; then
             echo "ENVI=test" >> $GITHUB_ENV
             echo "DB_NAME=TEST_BALA" >> $GITHUB_ENV
-          elif [[ "${{ github.base_ref }}" == "master" ]]; then
-            echo "ENVI=master" >> $GITHUB_ENV
+          elif [[ "${{ github.base_ref }}" == "main" ]]; then
+            echo "ENVI=main" >> $GITHUB_ENV
             echo "DB_NAME=PROD_BALA" >> $GITHUB_ENV
           fi
 
