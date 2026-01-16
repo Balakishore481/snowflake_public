@@ -10,8 +10,7 @@ conn = snowflake.connector.connect(
     password=os.environ['SNOWFLAKE_PSWD'],
     account=os.environ['SF_ACCOUNT'],
     role=os.environ['SF_ROLE'],
-    database=os.environ['SNOWFLAKE_DATABASE'],
-    #wh=os.environ['SF_WAREHOUSE'],
+    database=f"{envi.upper()}_BALA",
     schema="BALA"
 )
 
@@ -24,7 +23,7 @@ for file in sorted(os.listdir(folder)):
             print(sql)
             print(envi)
             # Replace placeholder {{ envi }} with actual environment
-            sql = sql.replace("{{ envi }}", envi)
+            sql = sql.replace("{{ envi }}", envi.upper())
             print(f"Executing {file} on {os.environ['SNOWFLAKE_DATABASE']}...")
             print(sql)
             cur.execute(sql)
